@@ -19,4 +19,12 @@ class AdvertController extends Controller
         $content = $this->get('templating')->render('OCPlatformBundle:Advert:bye.html.twig', array('bigName' => 'Brun'));
         return new Response($content);        
     }
+    public function viewAction($id)
+    {
+        return new Response('Affichage de l\'annonce '.$id);
+    }
+    public function viewSlugAction($year, $format, $slug)
+    {
+        return new Response('Affichage de year '.$year.' format '.$format.' et slug '.$slug);
+    }
 }
