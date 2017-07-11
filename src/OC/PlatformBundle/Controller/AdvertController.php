@@ -80,6 +80,14 @@ class AdvertController extends Controller
     }
     public function addAction(Request $request)
     {
+        // On récupère le service
+        $antispam = $this->container->get('oc_platform.antispam');
+        // Je pars du principe que $text contient le texte d'un message quelconque
+        $text = '...';
+        if ($antispam->isSpam($text)) {
+            throw new \Exception('Votre message a été détecté comme spam !');
+        }
+        // Ici le message n'est pas un spam
         if($request->isMethod('POST')){
             $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
             return $this->redirectToRoute('oc_platform_view', array('id' => 5));// à voir pourquoi pas un render classique ici ?
